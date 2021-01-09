@@ -14,3 +14,6 @@ def generate_links(url):
     soup = BeautifulSoup(website, "html.parser")
     for link in soup.findAll("a", attrs={"href": re.compile("^http://")}):
         print(link.get("href"))
+
+
+generate_links("https://www.wikipedia.org/")
