@@ -11,9 +11,8 @@ ctx.verify_mode = ssl.CERT_NONE
 
 def generate_links(url):
     website = urlopen(url, context=ctx).read()
-    soup = BeautifulSoup(website, "html.parser")
-    for link in soup.findAll("a", attrs={"href": re.compile("^http://")}):
-        print(link.get("href"))
+    links = BeautifulSoup(website, parse_only=SoupStrainer('a'))
+    print([link['href'] for link in links if link.has_attr('href')])
 
 
 generate_links("https://www.wikipedia.org/")
