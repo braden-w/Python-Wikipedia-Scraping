@@ -23,6 +23,7 @@ class Graph(nx.Graph):
 
     def view_nodes_edges(self):
         print(list(self.nodes), list(self.edges))
+        print(self.nodes.data())
 
 
 # G = Graph()
