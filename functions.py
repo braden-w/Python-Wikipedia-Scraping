@@ -25,7 +25,7 @@ class Graph(nx.Graph):
 # G = Graph()
 # G.add_nodes(1, 2)
 
-G = Graph()
+G = Graph("Germany")
 G.add_node(1)
 print(list(G.nodes), list(G.edges))
 print(G.number_of_nodes())
