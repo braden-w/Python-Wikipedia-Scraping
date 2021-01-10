@@ -4,7 +4,7 @@ import networkx as nx
 
 
 class Graph(nx.Graph):
-    def __init__(self, initial_page_name, language="en"):
+    def __init__(self, start_page_name, end_page_name, language="en"):
         super().__init__()
         self.page = wikipediaapi.Wikipedia(language).page(initial_page_name)
 
