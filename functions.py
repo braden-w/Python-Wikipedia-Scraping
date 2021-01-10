@@ -1,5 +1,8 @@
 import wikipediaapi
 
+import networkx as nx
+
+G = nx.Graph()
 
 def generate_links(page_name, language="en"):
     # page_name is a page name, not a URL
@@ -12,11 +15,9 @@ def generate_links(page_name, language="en"):
 
 
 def from_a_to_b(a, b, path=[]):
-    if b in a:
-        return path + b
-    else:
-        for key in a:
+    G.add_nodes(generate_links(a))
             from_a_to_b(generate_links(key), b, path + list(key))
+
 
 
 generate_links("Germany")
