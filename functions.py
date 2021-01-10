@@ -19,6 +19,8 @@ class Graph(nx.Graph):
         print(links.keys())
         return links.keys()
 
+    def check_path(self, a, b):
+        super().shortest_path(G, source=a, target=b)
 
 # G = Graph()
 # G.add_nodes(1, 2)
