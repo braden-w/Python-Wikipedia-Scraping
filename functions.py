@@ -4,10 +4,12 @@ import networkx as nx
 
 
 class Graph(nx.Graph):
-    def __init__(self, start_page_name, end_page_name, language="en"):
+    def __init__(self, start_page, end_page, language="en"):
         super().__init__()
         # initializes Wikipedia is specified language (since the language is constant as pages change)
         self.wikipedia = wikipediaapi.Wikipedia(language)
+        self.start_page = start_page
+        self.end_page = end_page
         self.queue = deque()
         self.queue.append(start_page)
 
