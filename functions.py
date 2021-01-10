@@ -6,8 +6,7 @@ import networkx as nx
 class Graph(nx.Graph):
     def __init__(self, initial_page_name, language="en"):
         super().__init__()
-        self.initial_page_name = initial_page_name
-        self.wiki_wiki = wikipediaapi.Wikipedia(language)
+        self.page = wikipediaapi.Wikipedia(language).page(initial_page_name)
 
     # def from_a_to_b(a, b, path=[]):
     #     self.G.add_nodes(generate_edges_by_one_step(a))
