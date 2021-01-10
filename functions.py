@@ -4,10 +4,10 @@ import networkx as nx
 
 
 class Graph(nx.Graph):
-    def __init__(self, page_name, language="en"):
+    def __init__(self, initial_page_name, language="en"):
         super().__init__()
-        self.page_name = page_name
-        self.language = language
+        self.initial_page_name = initial_page_name
+        self.wiki_wiki = wikipediaapi.Wikipedia(language)
 
     # def from_a_to_b(a, b, path=[]):
     #     self.G.add_nodes(generate_edges_by_one_step(a))
@@ -15,7 +15,7 @@ class Graph(nx.Graph):
     def generate_edges_by_one_step(page_name, language="en"):
         # page_name is a page name, not a URL
 
-        wiki_wiki = wikipediaapi.Wikipedia(language)
+        self.wiki_wiki = wikipediaapi.Wikipedia(language)
         page = wiki_wiki.page(page_name)
         links = page.links
         print(links.keys())
