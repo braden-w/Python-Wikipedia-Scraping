@@ -22,6 +22,10 @@ class Graph(nx.Graph):
     def check_path(self, a, b):
         super().shortest_path(G, source=a, target=b)
 
+    def view_nodes_edges(self):
+        print(list(self.nodes), list(self.edges))
+
+
 # G = Graph()
 # G.add_nodes(1, 2)
 
