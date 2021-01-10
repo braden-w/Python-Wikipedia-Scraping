@@ -4,6 +4,10 @@ import networkx as nx
 
 
 class Graph(nx.Graph):
+    def __init__(self, page_name, language="en"):
+        super().init()
+        self.page_name = page_name
+        self.language = language
 
     # def from_a_to_b(a, b, path=[]):
     #     self.G.add_nodes(generate_edges_by_one_step(a))
@@ -23,5 +27,6 @@ class Graph(nx.Graph):
 
 G = Graph()
 G.add_node(1)
+print(list(G.nodes), list(G.edges))
 print(G.number_of_nodes())
 # generate_edges_by_one_step("Germany")
