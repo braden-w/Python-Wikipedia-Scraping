@@ -1,11 +1,8 @@
 import wikipediaapi
-wiki_wiki = wikipediaapi.Wikipedia('en')
-page_py = wiki_wiki.page('Word')
 
 
-def generate_links(page):
+def generate_links(page_name, language = 'en'):
+    wiki_wiki = wikipediaapi.Wikipedia(language)
+    page = wiki_wiki.page(page_name)
     links = page.links
     print(links.keys())
-
-
-generate_links(page_py)
