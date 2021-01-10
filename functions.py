@@ -7,7 +7,8 @@ def generate_links(page_name, language="en"):
     wiki_wiki = wikipediaapi.Wikipedia(language)
     page = wiki_wiki.page(page_name)
     links = page.links
-    print(links.keys())
+    print(links)
+    return links.keys()
 
 
 def from_a_to_b(a, b, path=[]):
@@ -15,7 +16,7 @@ def from_a_to_b(a, b, path=[]):
         return path + b
     else:
         for key in a:
-            from_a_to_b(generate_links(a))
+            from_a_to_b(generate_links(key), b, path + list(key))
 
 
-from_a_to_b("Germany", "Hitler")
+generate_links("Germany")
