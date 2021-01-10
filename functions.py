@@ -20,15 +20,10 @@ class Graph(nx.Graph):
         self.generate_node_with_children(self.queue.popleft())
         return nx.shortest_path(self, source=self.start_page, target=self.end_page)
 
-    def generate_node(self, node, children):
-        self.add_node(node, children=children)
-
-    def generate_node_with_children(self, page_name):
-        page_children = self.wikipedia.page(page_name).links.keys()
-        self.generate_node(page_name, page_children)
-
-    def check_path(self, a, b):
-        super().shortest_path(G, source=a, target=b)
+    def generate_node_with_children(self, node):
+        children = self.wikipedia.page(node).links.keys()
+        self.add_node(node)
+        self.queue.extend(children)
 
     def view_nodes_edges(self):
         print(list(self.nodes), list(self.edges))
