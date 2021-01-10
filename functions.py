@@ -5,7 +5,7 @@ import networkx as nx
 
 class Graph(nx.Graph):
     def __init__(self, page_name, language="en"):
-        super().init()
+        super().__init__()
         self.page_name = page_name
         self.language = language
 
