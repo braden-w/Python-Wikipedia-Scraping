@@ -12,9 +12,13 @@ class Graph(nx.Graph):
         self.end_page = end_page
         self.queue = deque()
         self.queue.append(start_page)
+        self.recurse_until_path()
 
-    def recurse_until_path(self, root):
-        self.generate_node_with_children(start_page_name)
+    def recurse_until_path(self):
+        while self.queue[0] != self.end_page:
+            self.generate_node_with_children(self.queue.popleft())
+        self.generate_node_with_children(self.queue.popleft())
+        return nx.shortest_path(self, source=self.start_page, target=self.end_page)
 
     def generate_node(self, node, children):
         self.add_node(node, children=children)
