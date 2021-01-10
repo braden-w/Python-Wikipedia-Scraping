@@ -11,6 +11,8 @@ class Graph(nx.Graph):
     def recurse_until_path(self, root):
         self.generate_node_with_children(start_page_name)
 
+    def generate_node(self, node, children):
+        self.add_node(node, children=children)
     def check_path(self, a, b):
         super().shortest_path(G, source=a, target=b)
 
