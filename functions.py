@@ -15,10 +15,10 @@ class Graph(nx.Graph):
         self.recurse_until_path()
 
     def recurse_until_path(self):
-        while self.queue[0] != self.end_page:
+        while self.queue[0] != end_page:
             self.generate_node_with_children(self.queue.popleft())
-        self.generate_node_with_children(self.queue.popleft())
-        return nx.shortest_path(self, source=self.start_page, target=self.end_page)
+        self.generate_node_with_children(self.queue.popleft()) 
+       return nx.shortest_path(self, source=self.start_page, target=self.end_page)
 
     def generate_node_with_children(self, node):
         children = self.wikipedia.page(node).links.keys()
