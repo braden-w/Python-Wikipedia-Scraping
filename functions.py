@@ -1,5 +1,5 @@
 import wikipediaapi
-
+from collections import deque
 import networkx as nx
 
 
@@ -7,6 +7,8 @@ class Graph(nx.Graph):
     def __init__(self, start_page_name, end_page_name, language="en"):
         super().__init__()
         self.wikipedia = wikipediaapi.Wikipedia(language)
+        self.queue = deque()
+        self.queue.append(start_page)
 
     def recurse_until_path(self, root):
         self.generate_node_with_children(start_page_name)
