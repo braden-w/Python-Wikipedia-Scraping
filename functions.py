@@ -8,16 +8,8 @@ class Graph(nx.Graph):
         super().__init__()
         self.wikipedia = wikipediaapi.Wikipedia(language)
 
-    # def from_a_to_b(a, b, path=[]):
-    #     self.G.add_nodes(generate_edges_by_one_step(a))
-    #         from_a_to_b(generate_edges_by_one_step(key), b, path + list(key))
-    def generate_edges_by_one_step(
-        self,
-    ):
-        # page_name is a page name, not a URL
-        links = page.links
-        print(links.keys())
-        return links.keys()
+    def recurse_until_path(self, root):
+        self.generate_node_with_children(start_page_name)
 
     def check_path(self, a, b):
         super().shortest_path(G, source=a, target=b)
