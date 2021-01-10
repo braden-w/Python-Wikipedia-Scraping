@@ -4,7 +4,7 @@ import networkx as nx
 
 G = nx.Graph()
 
-def generate_links(page_name, language="en"):
+def generate_edges_by_one_step(page_name, language="en"):
     # page_name is a page name, not a URL
 
     wiki_wiki = wikipediaapi.Wikipedia(language)
