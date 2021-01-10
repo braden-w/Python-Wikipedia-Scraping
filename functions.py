@@ -31,6 +31,5 @@ class Graph(nx.Graph):
 
 G = Graph("Germany")
 G.add_node(1)
-print(list(G.nodes), list(G.edges))
-print(G.number_of_nodes())
+G.view_nodes_edges()
 # generate_edges_by_one_step("Germany")
