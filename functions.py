@@ -29,7 +29,6 @@ class Graph(nx.Graph):
 # G = Graph()
 # G.add_nodes(1, 2)
 
-G = Graph("Germany")
-G.add_node(1)
+G = Graph("Germany", "Spain")
 G.view_nodes_edges()
 # generate_edges_by_one_step("Germany")
