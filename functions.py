@@ -21,7 +21,6 @@ class Graph(nx.Graph):
             self.generate_node_with_children(self.queue.popleft())
             # self.view_nodes_edges()
         self.generate_node_with_children(self.queue.popleft())
-        print(nx.shortest_path(self, source=self.start_page, target=self.end_page))
         return nx.shortest_path(self, source=self.start_page, target=self.end_page)
 
     def generate_node_with_children(self, node):
