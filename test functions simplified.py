@@ -35,7 +35,7 @@ def recurse_until_path(start_page, end_page, queue, graph):
 
 
 def generate_node_with_children(
-    node: {"node_name": str, "node_object": object, "node_parent": object},
+    node: {"node_name": str, "node_object": object, "node_parent": str},
     queue,
     graph,
 ):
