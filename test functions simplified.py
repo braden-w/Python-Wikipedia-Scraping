@@ -56,4 +56,5 @@ def generate_node_with_children(
 
 
 G = nx.DiGraph()
+print(test_wikipedia("Feyerabend", "Germany", G))
 # 11th Infantry Division (Wehrmacht)
