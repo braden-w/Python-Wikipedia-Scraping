@@ -13,7 +13,7 @@ class Graph(nx.Graph):
         self.end_page = end_page
         self.current_parent = start_page
         self.queue = deque([self.start_page])
-        profile.runctx("self.recurse_until_path()", globals(), locals())
+        profile.runctx("print(self.recurse_until_path())", globals(), locals())
         # self.recurse_until_path()
 
     def recurse_until_path(self):
