@@ -27,6 +27,7 @@ class Graph(nx.DiGraph):
 
     def recurse_until_path(self):
         counter = 0
+
         while self.queue[0] != self.end_page:
             self.generate_node_with_children(self.queue.popleft())
             counter += 1
@@ -41,12 +42,12 @@ class Graph(nx.DiGraph):
             {
                 "node_name": child_name,
                 "node_object": child_object,
-                "node_parent": node["node_object"],
+                "node_parent": node["node_name"],
             }
             for child_name, child_object in node["node_object"].links.items()
         ]
         if node["node_parent"] is not None:
-            self.add_edge(node["node_parent"], node["node_object"])
+            self.add_edge(str(node["node_parent"]), str(node["node_name"]))
         self.queue.extend(children)
         # print(self.queue)
 
