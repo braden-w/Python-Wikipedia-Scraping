@@ -2,6 +2,7 @@ import wikipediaapi
 from collections import deque
 import networkx as nx
 import pprint
+import matplotlib.pyplot as plt
 
 
 def test_wikipedia(start_page, end_page, graph, language="en"):
@@ -20,9 +21,14 @@ def test_wikipedia(start_page, end_page, graph, language="en"):
 
 
 def recurse_until_path(start_page, end_page, queue, graph):
+    counter = 0
     while queue[0]["node_name"] != end_page:
         generate_node_with_children(queue.popleft(), queue, graph)
         # view_nodes_edges()
+        nx.draw(graph, with_labels=True, font_weight="bold")
+        plt.savefig("picture" + str(counter) + ".png")
+        counter += 1
+
     pprint.pprint(queue[0])
     generate_node_with_children(queue.popleft(), queue, graph)
     return nx.shortest_path(graph, source=start_page, target=end_page)
@@ -46,9 +52,9 @@ def generate_node_with_children(
         for child_name, child_object in node["node_links_dictionary"].items()
     ]
     # pprint.pprint(children)
-
-    graph.add_node(node["node_name"])
-    graph.add_edge(node["node_name"], node["node_parent"])
+    if node["node_parent"] is not None:
+        graph.add_node(node["node_name"])
+        graph.add_edge(node["node_name"], node["node_parent"])
     queue.extend(children)
 
 
