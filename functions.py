@@ -27,9 +27,7 @@ class Graph(nx.DiGraph):
         # self.recurse_until_path()
 
     def recurse_until_path(self):
-        counter = 0
-
-        while self.queue[0] != self.end_page:
+        while self.queue[0]["node_name"] != self.end_page:
             self.generate_node_with_children(self.queue.popleft())
             counter += 1
         self.generate_node_with_children(self.queue.popleft())
