@@ -47,7 +47,7 @@ class Graph(nx.DiGraph):
             for child_name, child_object in node["node_object"].links.items()
         ]
         if node["node_parent"] is not None:
-            self.add_edge(str(node["node_parent"]), str(node["node_name"]))
+            self.add_edge(node["node_parent"], node["node_name"])
         self.queue.extend(children)
         # print(self.queue)
 
