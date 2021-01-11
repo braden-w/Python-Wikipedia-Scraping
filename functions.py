@@ -66,4 +66,6 @@ class Graph(nx.DiGraph):
 
 
 G = Graph("Feyerabend", "Germany")
+# Feyerabend
+# 18th-century history of Germany
 # 11th Infantry Division (Wehrmacht)
