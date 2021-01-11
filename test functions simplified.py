@@ -55,8 +55,7 @@ def generate_node_with_children(
     ]
     # pprint.pprint(children)
     if node["node_parent"] is not None:
-        graph.add_node(node["node_name"])
-        graph.add_edge(node["node_name"], node["node_parent"])
+        graph.add_edge(str(node["node_name"]), str(node["node_parent"]))
     queue.extend(children)
 
 
