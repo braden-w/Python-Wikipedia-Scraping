@@ -55,6 +55,5 @@ def generate_node_with_children(
     queue.extend(children)
 
 
-G = nx.Graph()
-print(test_wikipedia("Feyerabend", "11th Infantry Division (Wehrmacht)", G))
+G = nx.DiGraph()
 # 11th Infantry Division (Wehrmacht)
