@@ -41,10 +41,6 @@ def generate_node_with_children(
     queue,
     graph,
 ):
-    # pprint.pprint(node["node_links_dictionary"])
-    # pprint.pprint([item for item in queue])
-
-    # print(node["node_links_dictionary"])
     children = [
         {
             "node_name": child_name,
