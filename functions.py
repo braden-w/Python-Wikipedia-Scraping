@@ -23,7 +23,6 @@ class Graph(nx.DiGraph):
                 }
             ]
         )
-        profile.runctx("print(self.recurse_until_path())", globals(), locals())
         # self.recurse_until_path()
 
     def recurse_until_path(self):
@@ -66,6 +65,7 @@ class Graph(nx.DiGraph):
 
 
 G = Graph("Feyerabend", "Germany")
+G.recurse_until_path()
 # Feyerabend
 # 18th-century history of Germany
 # 11th Infantry Division (Wehrmacht)
