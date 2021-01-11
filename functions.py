@@ -49,7 +49,7 @@ class Graph(nx.DiGraph):
         self.queue.extend(children)
         # print(self.queue)
 
-    def view_nodes_edges(self):
+    def list_nodes_edges(self):
         print(list(self.nodes), list(self.edges))
         # print(self.nodes.data())
 
