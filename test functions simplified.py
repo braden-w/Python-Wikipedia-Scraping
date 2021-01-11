@@ -43,12 +43,12 @@ def generate_node_with_children(
         {
             "node_name": child_name,
             "node_object": child_object,
-            "node_parent": node["node_name"],
+            "node_parent": node["node_object"],
         }
         for child_name, child_object in node["node_object"].links.items()
     ]
     if node["node_parent"] is not None:
-        graph.add_edge(node["node_parent"], node["node_name"])
+        graph.add_edge(node["node_parent"], node["node_object"])
     queue.extend(children)
 
 
