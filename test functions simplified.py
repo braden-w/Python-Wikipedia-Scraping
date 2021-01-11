@@ -12,7 +12,7 @@ def test_wikipedia(start_page, end_page, graph, language="en"):
         [
             {
                 "node_name": start_page,
-                "node_links_dictionary": start_page_object.links,
+                "node_object": start_page_object,
                 "node_parent": None,
             }
         ]
@@ -35,7 +35,7 @@ def recurse_until_path(start_page, end_page, queue, graph):
 
 
 def generate_node_with_children(
-    node: {"node_name": str, "node_links_dictionary": object, "node_parent": object},
+    node: {"node_name": str, "node_object": object, "node_parent": object},
     queue,
     graph,
 ):
@@ -46,10 +46,10 @@ def generate_node_with_children(
     children = [
         {
             "node_name": child_name,
-            "node_links_dictionary": child_object.links,
+            "node_object": child_object,
             "node_parent": node["node_name"],
         }
-        for child_name, child_object in node["node_links_dictionary"].items()
+        for child_name, child_object in node["node_object"].links.items()
     ]
     # pprint.pprint(children)
     if node["node_parent"] is not None:
