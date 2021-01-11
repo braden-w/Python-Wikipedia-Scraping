@@ -1,5 +1,0 @@
-Each value of
-
-{'Gerhard Feyerabend': Gerhard Feyerabend (id: ??, ns: 0), 'Germans': Germans (id: ??, ns: 0), 'Given name': Given name (id: ??, ns: 0), 'Henry Feyerabend': Henry Feyerabend (id: ??, ns: 0), 'Markus Feyerabend': Markus Feyerabend (id: ??, ns: 0), 'Paul Feyerabend': Paul Feyerabend (id: ??, ns: 0), 'Sigmund Feyerabend': Sigmund Feyerabend (id: ??, ns: 0), 'Surname': Surname (id: ??, ns: 0), 'Talk:Feyerabend': Talk:Feyerabend (id: ??, ns: 1), 'Wikipedia:Manual of Style/Linking': Wikipedia:Manual of Style/Linking (id: ??, ns: 4)}
-
-is another Wikipedia Article Object
