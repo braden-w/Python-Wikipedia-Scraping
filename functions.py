@@ -53,6 +53,10 @@ class Graph(nx.DiGraph):
         print(list(self.nodes), list(self.edges))
         # print(self.nodes.data())
 
+    def create_graph(self):
+        nx.draw(self, with_labels=True)
+        plt.show()
+
 
 G = Graph("Feyerabend", "Germany")
 # 11th Infantry Division (Wehrmacht)
