@@ -29,9 +29,6 @@ class Graph(nx.DiGraph):
         counter = 0
         while self.queue[0] != self.end_page:
             self.generate_node_with_children(self.queue.popleft())
-            # self.view_nodes_edges()
-            nx.draw(self, with_labels=True)
-            plt.savefig("picture" + str(counter) + ".png")
             counter += 1
         self.generate_node_with_children(self.queue.popleft())
         return nx.shortest_path(self, source=self.start_page, target=self.end_page)
