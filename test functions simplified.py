@@ -25,9 +25,7 @@ def recurse_until_path(start_page, end_page, queue, graph):
     while queue[0]["node_name"] != end_page:
         generate_node_with_children(queue.popleft(), queue, graph)
         # view_nodes_edges()
-        nx.draw(
-            graph, pos=nx.spring_layout(graph), with_labels=True, font_weight="bold"
-        )
+        nx.draw(graph, pos=nx.spring_layout(graph), with_labels=True)
         plt.savefig("picture" + str(counter) + ".png")
         counter += 1
 
