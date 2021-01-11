@@ -13,6 +13,7 @@ class Graph(nx.DiGraph):
         start_page_object = self.wikipedia.page(start_page)
         self.start_page = start_page
         self.end_page = end_page
+        self.image_counter = 0
         self.queue = deque(
             [
                 {
@@ -58,6 +59,12 @@ class Graph(nx.DiGraph):
     def create_graph(self):
         nx.draw(self, with_labels=True)
         plt.show()
+
+    def write_graph(self):
+        nx.draw(self, with_labels=True)
+        plt.savefig("img" + str(self.image_counter) + ".png")
+        plt.clf()
+        self.image_counter += 1
 
 
 G = Graph("Feyerabend", "Germany")
