@@ -16,7 +16,7 @@ class Graph(nx.DiGraph):
         self.end_page = end_page
         self.image_counter = 0
         self.done = False
-        self.queue = deque(
+        self.queue = asyncio.Queue(
             [
                 {
                     "node_name": start_page,
