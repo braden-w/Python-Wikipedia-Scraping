@@ -23,7 +23,6 @@ class Graph(nx.DiGraph):
                 }
             ]
         )
-        # self.recurse_until_path()
 
     def recurse_until_path(self):
         while self.queue[0]["node_name"] != self.end_page:
