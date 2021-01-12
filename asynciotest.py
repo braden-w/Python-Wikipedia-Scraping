@@ -55,4 +55,12 @@ def approach_1():
 
 
 # approach_1()
-asyncio.run(approach_2())
+# asyncio.run(approach_2())
+
+
+async def main():
+    await asyncio.sleep(10)
+    print("hello")
+
+
+asyncio.run(main())
