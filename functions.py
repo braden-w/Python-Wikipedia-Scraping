@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 class Graph(nx.DiGraph):
-    def __init__(self, start_page, end_page, language="en"):
+    def __init__(self, start_page: str, end_page: str, language: str = "en"):
         super().__init__()
         # initializes Wikipedia is specified language (since the language is constant as pages change)
         self.wikipedia = wikipediaapi.Wikipedia(language)
