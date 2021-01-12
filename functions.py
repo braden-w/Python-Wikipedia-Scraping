@@ -1,6 +1,5 @@
 import wikipediaapi
 import cProfile as profile
-from collections import deque
 import networkx as nx
 import matplotlib.pyplot as plt
 import asyncio
@@ -16,28 +15,28 @@ class Graph(nx.DiGraph):
         self.end_page = end_page
         self.image_counter = 0
         self.done = False
-        self.queue = asyncio.Queue(
-            [
-                {
-                    "node_name": start_page,
-                    "node_object": start_page_object,
-                    "node_parent": None,
-                }
-            ]
+        self.queue = asyncio.Queue()
+        self.queue.put_nowait(
+            {
+                "node_name": start_page,
+                "node_object": start_page_object,
+                "node_parent": None,
+            }
         )
 
+    # Consumer
     async def recurse_until_path(self):
         while self.done == False:
-            await asyncio.gather(
-                *(self.process_first_queue(node) for node in self.queue)
-            )
-            self.queue.clear()
+            current_node = await self.queue.get()
+            task = asyncio.create_task(self.process_node(current_node))
+            await task
+            self.queue.task_done()
+            print("Done")
             # self.write_graph()
         self.create_graph()
         return nx.shortest_path(self, source=self.start_page, target=self.end_page)
 
-    async def process_first_queue(self):
-        current_node = self.queue.popleft()
+    async def process_node(self, current_node):
         self.link_node_to_parent(current_node)
         self.add_children_to_queue(
             await self.generate_children_from_node(current_node),
@@ -52,16 +51,18 @@ class Graph(nx.DiGraph):
         if node["node_parent"] is not None:
             self.add_edge(node["node_parent"], node["node_name"])
 
+    # Producer
     def add_children_to_queue(self, children, parent):
         children_payload = [
-            {
-                "node_name": child_name,
-                "node_object": child_object,
-                "node_parent": parent,
-            }
+            self.queue.put_nowait(
+                {
+                    "node_name": child_name,
+                    "node_object": child_object,
+                    "node_parent": parent,
+                }
+            )
             for (child_name, child_object) in children
         ]
-        self.queue.extend(children_payload)
 
     async def generate_children_from_node(
         self, node: {"node_name": str, "node_object": object, "node_parent": str}
@@ -70,7 +71,6 @@ class Graph(nx.DiGraph):
             return node["node_object"].links
 
         loop = asyncio.get_event_loop()
-
         links = await loop.run_in_executor(None, generate_links, node)
         return links.items()
 
@@ -89,7 +89,7 @@ class Graph(nx.DiGraph):
         self.image_counter += 1
 
 
-G = Graph("Feyerabend", "Germany")
+G = Graph("Feyerabend", "11th Infantry Division (Wehrmacht)")
 print(asyncio.run(G.recurse_until_path()))
 # Feyerabend
 # 18th-century history of Germany
