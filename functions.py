@@ -15,6 +15,7 @@ class Graph(nx.DiGraph):
         self.start_page = start_page
         self.end_page = end_page
         self.image_counter = 0
+        self.done = False
         self.queue = deque(
             [
                 {
@@ -39,6 +40,8 @@ class Graph(nx.DiGraph):
         self.add_children_to_queue(
             self.generate_children_from_node(current_node), current_node["node_name"]
         )
+        if current_node["node_name"] == self.end_page:
+            self.done = True
 
     def link_node_to_parent(
         self, node: {"node_name": str, "node_object": object, "node_parent": str}
