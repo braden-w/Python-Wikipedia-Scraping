@@ -26,13 +26,20 @@ class Graph(nx.DiGraph):
 
     def recurse_until_path(self):
         while self.queue[0]["node_name"] != self.end_page:
-            self.generate_node_with_children(self.queue.popleft())
+            self.link_node_to_parent(self.queue.popleft())
             # self.write_graph()
-        self.generate_node_with_children(self.queue.popleft())
+        await self.link_node_to_parent(self.queue.popleft())
         self.create_graph()
         return nx.shortest_path(self, source=self.start_page, target=self.end_page)
 
-    def generate_node_with_children(
+    async def link_node_to_parent(
+        self, node: {"node_name": str, "node_object": object, "node_parent": str}
+    ):
+        if node["node_parent"] is not None:
+            self.add_edge(node["node_parent"], node["node_name"])
+        await self.generate_children_from_node(node)
+
+    async def generate_children_from_node(
         self, node: {"node_name": str, "node_object": object, "node_parent": str}
     ):
         children = [
@@ -43,10 +50,7 @@ class Graph(nx.DiGraph):
             }
             for (child_name, child_object) in node["node_object"].links.items()
         ]
-        if node["node_parent"] is not None:
-            self.add_edge(node["node_parent"], node["node_name"])
         self.queue.extend(children)
-        # print(self.queue)
 
     def list_nodes_edges(self):
         print(list(self.nodes), list(self.edges))
