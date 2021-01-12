@@ -1,12 +1,5 @@
-/**
- * parse.js
- *
- * MediaWiki API Demos
- * Demo of `Parse` module: Parse content of a page
- *
- * MIT License
- */
- 
+const fetch = require("node-fetch");
+
 const url = "https://en.wikipedia.org/w/api.php?" +
     new URLSearchParams({
         origin: "*",
@@ -25,3 +18,5 @@ async function f() {
         
     }
 
+}
+f()
