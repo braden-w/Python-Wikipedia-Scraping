@@ -27,10 +27,12 @@ class Graph(nx.DiGraph):
     # Consumer
     async def recurse_until_path(self):
         while self.done == False:
-            current_node = await self.queue.get()
-            task = asyncio.create_task(self.process_node(current_node))
-            await task
-            self.queue.task_done()
+            await asyncio.gather(
+                *(
+                    self.process_node(self.queue.get_nowait())
+                    for i in range(self.queue.qsize())
+                )
+            )
             print("Done")
             # self.write_graph()
         self.create_graph()
