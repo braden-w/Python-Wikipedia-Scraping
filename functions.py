@@ -25,33 +25,42 @@ class Graph(nx.DiGraph):
             ]
         )
 
-    async def recurse_until_path(self):
+    def recurse_until_path(self):
         while self.queue[0]["node_name"] != self.end_page:
-            self.link_node_to_parent(self.queue.popleft())
+            self.process_first_queue()
             # self.write_graph()
-        await self.link_node_to_parent(self.queue.popleft())
+        self.process_first_queue()
         self.create_graph()
         return nx.shortest_path(self, source=self.start_page, target=self.end_page)
 
-    async def link_node_to_parent(
+    def process_first_queue(self):
+        current_node = self.queue.popleft()
+        self.link_node_to_parent(current_node)
+        self.add_children_to_queue(
+            self.generate_children_from_node(current_node), current_node["node_name"]
+        )
+
+    def link_node_to_parent(
         self, node: {"node_name": str, "node_object": object, "node_parent": str}
     ):
         if node["node_parent"] is not None:
             self.add_edge(node["node_parent"], node["node_name"])
-        await self.generate_children_from_node(node)
 
-    async def generate_children_from_node(
-        self, node: {"node_name": str, "node_object": object, "node_parent": str}
-    ):
-        children = [
+    def add_children_to_queue(self, children, parent):
+        children_payload = [
             {
                 "node_name": child_name,
                 "node_object": child_object,
-                "node_parent": node["node_name"],
+                "node_parent": parent,
             }
-            for (child_name, child_object) in node["node_object"].links.items()
+            for (child_name, child_object) in children
         ]
-        self.queue.extend(children)
+        self.queue.extend(children_payload)
+
+    def generate_children_from_node(
+        self, node: {"node_name": str, "node_object": object, "node_parent": str}
+    ):
+        return node["node_object"].links.items()
 
     def list_nodes_edges(self):
         print(list(self.nodes), list(self.edges))
@@ -68,8 +77,8 @@ class Graph(nx.DiGraph):
         self.image_counter += 1
 
 
-G = Graph("Feyerabend", "Germany")
-G.recurse_until_path()
+G = Graph("Feyerabend", "11th Infantry Division (Wehrmacht)")
+print(G.recurse_until_path())
 # Feyerabend
 # 18th-century history of Germany
 # 11th Infantry Division (Wehrmacht)
