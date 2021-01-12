@@ -24,7 +24,7 @@ class Graph(nx.DiGraph):
             ]
         )
 
-    def recurse_until_path(self):
+    async def recurse_until_path(self):
         while self.queue[0]["node_name"] != self.end_page:
             self.link_node_to_parent(self.queue.popleft())
             # self.write_graph()
