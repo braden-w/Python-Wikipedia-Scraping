@@ -3,6 +3,7 @@ import cProfile as profile
 from collections import deque
 import networkx as nx
 import matplotlib.pyplot as plt
+import asyncio
 
 
 class Graph(nx.DiGraph):
