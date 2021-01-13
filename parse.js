@@ -4,13 +4,13 @@ const getData = async (url = '', requestAsJSON = {}) => {
     requestAsURL = new URLSearchParams(requestAsJSON).toString()
     const response = await fetch(url + requestAsURL);
     const json = await response.json();
-    const pages = json["query"]["pages"]
+    const pages = json.query.pages
     let links = []
     for (const pageID in pages) {
         const page = pages[pageID]
-        const pageLinks = page["links"]
+        const pageLinks = page.links
         for (const linkObject in pageLinks) {
-            links.push(pageLinks[linkObject]["title"])
+            links.push(pageLinks[linkObject].title)
         }
     }
     return links
