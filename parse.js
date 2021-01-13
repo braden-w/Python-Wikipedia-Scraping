@@ -1,7 +1,7 @@
 const getLinks = async (url = '', requestAsJSON = {}) => {
     let links = [];
     let plcontinue = true;
-    let query, json = {};
+    let query, json = {}, requestAsURL;
 	while (plcontinue) {
 		requestAsURL = new URLSearchParams(requestAsJSON).toString()
 		const response = await fetch(url + requestAsURL)
