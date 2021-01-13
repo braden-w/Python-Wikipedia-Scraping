@@ -1,5 +1,3 @@
-const fetch = require('node-fetch')
-
 const getLinks = async (url = '', requestAsJSON = {}) => {
     let links = [];
     let plcontinue = true;
