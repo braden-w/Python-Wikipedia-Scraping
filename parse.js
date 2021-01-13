@@ -8,7 +8,7 @@ const getLinks = async (url = '', requestAsJSON = {}) => {
 		requestAsURL = new URLSearchParams(requestAsJSON).toString()
 		const response = await fetch(url + requestAsURL)
         json = await response.json();
-        ({ continue: { plcontinue }, query: { pages } } = json);
+        ({ continue: { plcontinue } = {plcontinue:false}, query: { pages } } = json);
 
 		for (const pageID in pages) {
 			const pageLinks = pages[pageID].links
