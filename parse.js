@@ -11,13 +11,13 @@ const getLinks = async (url = '', requestAsJSON = {}) => {
         ({ continue: { plcontinue } = {plcontinue:false}, query: { pages } } = json);
 
 		for (const pageID in pages) {
-			const pageLinks = pages[pageID].links
+            const pageLinks = pages[pageID].links;
 			for (const linkObject in pageLinks) {
 				links.push(pageLinks[linkObject].title)
 			}
 		}
         requestAsJSON.plcontinue = plcontinue;
-	}
+    }
     return links;
 }
 const url = 'https://en.wikipedia.org/w/api.php?'
