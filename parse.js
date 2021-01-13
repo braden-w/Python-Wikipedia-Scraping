@@ -16,9 +16,9 @@ const getLinks = async (url = '', requestAsJSON = {}) => {
 				links.push(pageLinks[linkObject].title)
 			}
 		}
-		requestAsJSON.plcontinue = plcontinue
+        requestAsJSON.plcontinue = plcontinue;
 	}
-	return links
+    return links;
 }
 const url = 'https://en.wikipedia.org/w/api.php?'
 const data = {
