@@ -6,6 +6,8 @@ const getLinks = async (url = '', requestAsJSON = {}) => {
     const json = await response.json();
     const pages = json.query.pages;
     let links = [];
+    console.log(pages)
+    console.log(json)
     for (const pageID in pages) {
         const page = pages[pageID];
         const pageLinks = page.links;
