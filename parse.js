@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const getData = async (url = '', requestAsJSON = {}) => {
+const getLinks = async (url = '', requestAsJSON = {}) => {
     requestAsURL = new URLSearchParams(requestAsJSON).toString()
     const response = await fetch(url + requestAsURL);
     const json = await response.json();
@@ -24,4 +24,4 @@ const data = {
         titles:"Hello"
     };
 
-getData(url, data).then(links => console.log(links))
+getLinks(url, data).then(links => console.log(links))
