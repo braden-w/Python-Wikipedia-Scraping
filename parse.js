@@ -11,8 +11,7 @@ const getLinks = async (url = '', requestAsJSON = {}) => {
         ({ continue: { plcontinue }, query: { pages } } = json);
 
 		for (const pageID in pages) {
-			const page = pages[pageID]
-			const pageLinks = page.links
+			const pageLinks = pages[pageID].links
 			for (const linkObject in pageLinks) {
 				links.push(pageLinks[linkObject].title)
 			}
