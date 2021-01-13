@@ -1,21 +1,27 @@
 const fetch = require("node-fetch");
 
-const url = "https://en.wikipedia.org/w/api.php?" +
-    new URLSearchParams({
+const getData = async (url = '', requestAsJSON = {}) => {
+    requestAsURL = new URLSearchParams(requestAsJSON).toString()
+    const response = await fetch(url + requestAsURL);
+    const json = await response.json();
+    const pages = json["query"]["pages"]
+    let links = []
+    for (const pageID in pages) {
+        const page = pages[pageID]
+        const pageLinks = page["links"]
+        for (const linkObject in pageLinks) {
+            links.push(pageLinks[linkObject]["title"])
+        }
+    }
+    return links
+}
+
+const url = "https://en.wikipedia.org/w/api.php?"
+const data = {
         action: "query",
         format: "json",
         prop: "links",
-        titles:"Albert Einstein"
-    });
-async function f() {
-    try {
-        const req = await fetch(url);
-        const json = await req.json();
-        console.log(json.parse.text["*"]);
-    } catch(e) {
-        console.error(e);
-        
-    }
+        titles:"Hello"
+    };
 
-}
-f()
+getData(url, data).then(links => console.log(links))
