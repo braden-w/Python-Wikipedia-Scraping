@@ -1,5 +1,10 @@
 
-const getLinks = async (url: any, requestAsJSON: any) => {
+const getLinks = async (url: any, requestAsJSON: any =  {
+	action: 'query',
+	format: 'json',
+	prop: 'links',
+	titles: 'Hello'
+}) => {
     const links = [];
     let nextPage: boolean|string = true;
     let query, json, requestAsURL: string, pages;
@@ -19,11 +24,5 @@ const getLinks = async (url: any, requestAsJSON: any) => {
     return links;
 }
 const apiURL = 'https://en.wikipedia.org/w/api.php?'
-const data = {
-	action: 'query',
-	format: 'json',
-	prop: 'links',
-	titles: 'Hello'
-}
 
-getLinks(apiURL, data).then((links) => console.log(links))
+getLinks(apiURL).then((links) => console.log(links))
