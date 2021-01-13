@@ -1,5 +1,5 @@
 
-const getLinks = async (url: any, requestAsJSON: any =  {
+const getLinks = async (apiURL: string = 'https://en.wikipedia.org/w/api.php?', requestAsJSON: any =  {
 	action: 'query',
 	format: 'json',
 	prop: 'links',
@@ -10,7 +10,7 @@ const getLinks = async (url: any, requestAsJSON: any =  {
     let query, json, requestAsURL: string, pages;
 	while (nextPage) {
 		requestAsURL = new URLSearchParams(requestAsJSON).toString()
-		const response = await fetch(url + requestAsURL)
+		const response = await fetch(apiURL + requestAsURL)
 		json = await response.json();
 		({ continue: { plcontinue: nextPage } = {plcontinue: false}, query: {pages} } = json);
 		for (const pageID in pages) {
@@ -23,6 +23,4 @@ const getLinks = async (url: any, requestAsJSON: any =  {
     }
     return links;
 }
-const apiURL = 'https://en.wikipedia.org/w/api.php?'
-
-getLinks(apiURL).then((links) => console.log(links))
+getLinks().then((links) => console.log(links))
