@@ -25,4 +25,5 @@
 	}
 	return links;
 }
-getLinks().then((links) => console.log(links))
+// console.log(await getLinks("Hello"))
+startWeb("Hello", "Afrikaans language")
