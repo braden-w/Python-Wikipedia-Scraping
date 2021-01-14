@@ -6,10 +6,14 @@ const startWeb = async (startPage: string, endPage: string) =>
 	let currentNode: string | undefined;
 	let links = [];
 	while (done === false) {
-		;currentNode = queue.shift();
+		currentNode = queue.shift();
 		links = await getLinks(currentNode);
 		links.forEach(link => {
 			queue.push(link);
+			web[link] = currentNode;
+			if (link === endPage) {
+				done = true;
+			}
 		});
 	}
 	return web;
@@ -43,4 +47,4 @@ const getLinks = async (
 	return links;
 }
 // console.log(await getLinks("Hello"))
-startWeb("Hello", "Afrikaans language")
+console.log(await startWeb("Feyerabend", "Germany"))
