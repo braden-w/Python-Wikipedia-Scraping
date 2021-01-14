@@ -1,3 +1,19 @@
+const startWeb = async (startPage: string, endPage: string) =>
+	{
+	let done = false;
+	const queue: string[] = [startPage];
+	const web: any = {};
+	let currentNode: string | undefined;
+	let links = [];
+	while (done === false) {
+		;currentNode = queue.shift();
+		links = await getLinks(currentNode);
+		links.forEach(link => {
+			queue.push(link);
+		});
+	}
+	return web;
+}
 
 const getLinks = async (
 	title: string | undefined,
