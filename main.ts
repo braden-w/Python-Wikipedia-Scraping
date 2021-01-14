@@ -1,11 +1,12 @@
 
-		titles: titinks = async (
+const getLinks = async (
 	title: string | undefined,
 	apiURL: string = 'https://en.wikipedia.org/w/api.php?',
 	requestAsJSON: any = {
 		action: 'query',
 		format: 'json',
-		prop: 'linkle
+		prop: 'links',
+		titles: title
 	}) => {
 	const links = [];
 	let nextPage: boolean | string = true;
