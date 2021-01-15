@@ -1,4 +1,4 @@
-const startWeb = (startPage: string, endPage: string) =>
+const startWeb = async (startPage: string, endPage: string) =>
 	{
 	let done = false;
 	const queue: string[] = [startPage];
