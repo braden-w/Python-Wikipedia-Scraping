@@ -17,7 +17,6 @@ const startWeb = async (startPage: string, endPage: string) =>
 			});
 		});
 	}
-	return web;
 }
 
 const getLinks = async (
