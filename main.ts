@@ -7,13 +7,14 @@ const startWeb = async (startPage: string, endPage: string) =>
 	let links = [];
 	while (done === false) {
 		currentNode = queue.shift();
-		links = await getLinks(currentNode);
-		links.forEach(link => {
-			queue.push(link);
-			web[link] = currentNode;
-			if (link === endPage) {
-				done = true;
-			}
+		getLinks(currentNode).then(links => {
+			links.forEach(link => {
+				queue.push(link);
+				web[link] = currentNode!;
+				if (link === endPage) {
+					return web;
+				}
+			});
 		});
 	}
 	return web;
