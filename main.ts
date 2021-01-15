@@ -49,5 +49,9 @@ const getLinks = async (
 var t0 = performance.now()
 
 // getLinks("Feyerabend").then(links => console.log(links));
+// console.log(await getLinks("Feyerabend"));
+
+// console.log(startWeb("Feyerabend", "Germany"));
+// console.log(await startWeb("Feyerabend", "Germany"))
 var t1 = performance.now()
 console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
