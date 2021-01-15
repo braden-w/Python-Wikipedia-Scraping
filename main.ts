@@ -1,8 +1,8 @@
-const startWeb = async (startPage: string, endPage: string) =>
+const startWeb = (startPage: string, endPage: string) =>
 	{
 	let done = false;
 	const queue: string[] = [startPage];
-	const web: any = {};
+	const web: Record<string, string> = {};
 	let currentNode: string | undefined;
 	let links = [];
 	while (done === false) {
