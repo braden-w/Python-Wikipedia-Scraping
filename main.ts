@@ -56,13 +56,13 @@ var t0 = performance.now()
 // console.log(await getLinks("Feyerabend"));
 
 // console.log(startWeb("Feyerabend", "Germany"));
-// console.log(await startWeb("Feyerabend", "Germany"))
+console.log(await startWeb("Feyerabend", "Germany"))
 
-getLinks("Feyerabend").then(links => {
-	links.forEach(link => {
-		console.log(link)
-	})
-});
-		
+// getLinks("Feyerabend").then(links => {
+// 	links.forEach(link => {
+// 		console.log(link)
+// 	})
+// });
+
 var t1 = performance.now()
 console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
