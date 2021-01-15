@@ -32,9 +32,8 @@ const getLinks = async (
 	let nextPage: boolean | string = true;
 	let query, json, requestAsURL: string, pages;
 	while (nextPage) {
-		requestAsURL = new URLSearchParams(requestAsJSON).toString()
-		const response = await fetch(apiURL + requestAsURL)
-		json = await response.json();
+		requestAsURL = new URLSearchParams(requestAsJSON).toString();
+		const json = await (await fetch(apiURL + requestAsURL)).json();
 		({ continue: { plcontinue: nextPage } = { plcontinue: false }, query: { pages } } = json);
 		for (const pageID in pages) {
 			const pageLinks = pages[pageID].links;
