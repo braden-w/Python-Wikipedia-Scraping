@@ -6,15 +6,15 @@ const startWeb = async (startPage: string, endPage: string) =>
 		const currentNodes = queue.splice(0, 200);
 		const currentPromises = currentNodes.map(title => getLinks(title));
 		const fulfilledPromises = await Promise.all(currentPromises);
-		fulfilledPromises.forEach(fulfilledPromise => {
-			fulfilledPromise.links.forEach(link => {
+		for (const fulfilledPromise of fulfilledPromises) {
+			for (const link of fulfilledPromise.links) {
 				queue.push(link);
 				web[link] = fulfilledPromise.title!;
 				if (link === endPage) {
 					return web;
 				}
-			});
-		});
+			};
+		};
 	}
 }
 
@@ -56,8 +56,8 @@ var t0 = performance.now()
 // console.log(await Promise.all(getsPromises));
 
 
-// console.log(await startWeb("Feyerabend", "Germany"));
-console.log(await startWeb("Feyerabend", "Gerhard Feyerabend"));
+console.log(await startWeb("Feyerabend", "Germany"));
+// console.log(await startWeb("Feyerabend", "Gerhard Feyerabend"));
 
 // getLinks("Feyerabend").then(links => {
 // 	links.forEach(link => {
