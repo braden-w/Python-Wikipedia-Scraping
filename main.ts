@@ -1,14 +1,14 @@
 const startWeb = (startPage: string, endPage: string) =>
 	{
 	const queue: string[] = [startPage];
+	const promiseQueue = [];
 	const web: Record<string, string> = {};
-	const processFirstQueue = (queue:string[], web: Record<string,string>) => {
-		// if (queue === []) {
-		// 	await new Promise(r => setTimeout(r, 100));
-		// 	continue;
-		// }
+	const processFirstQueue = () => {
 		const currentNode: string | undefined = queue.shift();
-		getLinks(currentNode).then(links => {
+		promiseQueue.push(getLinks(currentNode));
+	}
+	const processCompletedPromise = () {
+		return Promise.all(promiseQueue).then(links => {
 			links.forEach(link => {
 				queue.push(link);
 				web[link] = currentNode!;
@@ -17,10 +17,12 @@ const startWeb = (startPage: string, endPage: string) =>
 				}
 			});
 		});
-		while (queue == []) { }
-		processFirstQueue(queue, web);
 	}
-	processFirstQueue(queue, web);
+	while (true) {
+		while (queue.length < 200) {
+			promiseQueue
+		}
+	}
 }
 
 const getLinks = async (
@@ -48,7 +50,7 @@ const getLinks = async (
 		}
 		requestAsJSON.plcontinue = nextPage;
 	}
-	return links;
+	return { title: title, links: links };
 }
 // console.log(await getLinks("Hello"))
 var t0 = performance.now()
