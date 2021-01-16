@@ -1,27 +1,20 @@
-const startWeb = (startPage: string, endPage: string) =>
-	{
-	const queue: string[] = [startPage];
-	const promiseQueue = [];
+const startWeb = async (startPage: string, endPage: string) =>
+{
+	const queue: string[] = [startPage]
 	const web: Record<string, string> = {};
-	const processFirstQueue = () => {
-		const currentNode: string | undefined = queue.shift();
-		promiseQueue.push(getLinks(currentNode));
-	}
-	const processCompletedPromise = () {
-		return Promise.all(promiseQueue).then(links => {
-			links.forEach(link => {
+	while (true) {
+		const currentNodes = queue.splice(0, 200);
+		const currentPromises = currentNodes.map(title => getLinks(title));
+		const fulfilledPromises = await Promise.all(currentPromises);
+		fulfilledPromises.forEach(fulfilledPromise => {
+			fulfilledPromise.links.forEach(link => {
 				queue.push(link);
-				web[link] = currentNode!;
+				web[link] = fulfilledPromise.title!;
 				if (link === endPage) {
 					return web;
 				}
 			});
 		});
-	}
-	while (true) {
-		while (queue.length < 200) {
-			promiseQueue
-		}
 	}
 }
 
@@ -58,14 +51,13 @@ var t0 = performance.now()
 // getLinks("Feyerabend").then(links => console.log(links));
 // console.log(await getLinks("Feyerabend"));
 
-// console.log(startWeb("Feyerabend", "Germany"));
-getLinks("Feyerabend").then(links => console.log(links))
-getLinks("Feyerabend").then(links => console.log(links))
-getLinks("Feyerabend").then(links => console.log(links))
-getLinks("Feyerabend").then(links => console.log(links))
-getLinks("Feyerabend").then(links => console.log(links))
-getLinks("Feyerabend").then(links => console.log(links))
-getLinks("Feyerabend").then(links => console.log(links))
+// const gets = ["Feyerabend", "Hello", "There", "My", "Friend", "Enemy"]
+// const getsPromises = gets.map(title => getLinks(title))
+// console.log(await Promise.all(getsPromises));
+
+
+// console.log(await startWeb("Feyerabend", "Germany"));
+console.log(await startWeb("Feyerabend", "Gerhard Feyerabend"));
 
 // getLinks("Feyerabend").then(links => {
 // 	links.forEach(link => {
