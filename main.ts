@@ -1,16 +1,13 @@
-const startWeb = async (startPage: string, endPage: string) =>
+const startWeb = (startPage: string, endPage: string) =>
 	{
 	const queue: string[] = [startPage];
 	const web: Record<string, string> = {};
-	while (true) {
+	const processFirstQueue = (queue:string[], web: Record<string,string>) => {
 		// if (queue === []) {
 		// 	await new Promise(r => setTimeout(r, 100));
 		// 	continue;
 		// }
-		while (queue === []) {
-			setTimeout(, 250);
-		}
-		const currentNode: string | undefined = await queue.shift();
+		const currentNode: string | undefined = queue.shift();
 		getLinks(currentNode).then(links => {
 			links.forEach(link => {
 				queue.push(link);
@@ -20,7 +17,10 @@ const startWeb = async (startPage: string, endPage: string) =>
 				}
 			});
 		});
+		while (queue == []) { }
+		processFirstQueue(queue, web);
 	}
+	processFirstQueue(queue, web);
 }
 
 const getLinks = async (
@@ -35,6 +35,7 @@ const getLinks = async (
 	const links = [];
 	let nextPage: boolean | string = true;
 	let query, json, requestAsURL: string, pages;
+	await new Promise(r => setTimeout(r, 2000));
 	while (nextPage) {
 		requestAsURL = new URLSearchParams(requestAsJSON).toString();
 		const json = await (await fetch(apiURL + requestAsURL)).json();
@@ -56,7 +57,13 @@ var t0 = performance.now()
 // console.log(await getLinks("Feyerabend"));
 
 // console.log(startWeb("Feyerabend", "Germany"));
-console.log(await startWeb("Feyerabend", "Germany"))
+getLinks("Feyerabend").then(links => console.log(links))
+getLinks("Feyerabend").then(links => console.log(links))
+getLinks("Feyerabend").then(links => console.log(links))
+getLinks("Feyerabend").then(links => console.log(links))
+getLinks("Feyerabend").then(links => console.log(links))
+getLinks("Feyerabend").then(links => console.log(links))
+getLinks("Feyerabend").then(links => console.log(links))
 
 // getLinks("Feyerabend").then(links => {
 // 	links.forEach(link => {
